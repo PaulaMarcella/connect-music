@@ -92,7 +92,6 @@ passport.use(
             callback(null, user); // To login the user
           } else {
             User.create({
-              firstname: profile.displayName,
               email: profile.email,
               firstname: profile.firstname,
               accessToken,
