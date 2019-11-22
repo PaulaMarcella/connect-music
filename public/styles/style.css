@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: black;
+  color: white;
+}
+
+a {
+  color: #00b7ff;
+}
+
+.body-container {
+  padding: 70px;
+}
+/*# sourceMappingURL=style.css.map */

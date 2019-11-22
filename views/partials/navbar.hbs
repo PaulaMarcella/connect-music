@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-0">
+  <a class="navbar-brand" href="/">LOGO</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  {{#if user}}
+    <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link active" href="/">{{user.firstname}}'s Profile<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/event/browse">Browse</a>
+        <a class="nav-item nav-link" href="/event/add">Add</a>
+        <form action="/auth/logout" method="POST">
+      <button class="btn">Log Out</button>
+        </form>
+      
+    </div>
+
+ {{else}}
+    <div class="navbar-nav ml-auto">
+      <a class="nav-item nav-link" href="/auth/signup">Sign Up</a>
+      <a class="nav-item nav-link" href="/auth/login">Log In</a>
+    </div>
+{{/if}}
+
+  </div>
+</nav>

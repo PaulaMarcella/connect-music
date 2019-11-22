@@ -1,0 +1,100 @@
+<h2>ADD EVENT FORM HERE</h2>
+
+<br>
+<h4 class="form-group">Share Your Event with the World</h4>
+<br>
+
+<div class="container">
+<form class="px-5" id="eventCreator" method="POST" action="/event/create" enctype="multipart/form-data">
+
+  <div class="row">
+    <div class="col">
+      <label for="event">Name your Event</label>
+    <input type="text" class="form-control" name="event" placeholder="Name your event">
+    </div>
+    <div class="col">
+      <label for="artists">Artist(s)</label>
+    <input type="text" class="form-control" name="artists" placeholder="Name the artist(s) that will headline your event"></input>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col">
+      <label for="city">City</label>
+    <input type="text" class="form-control" name="city" placeholder="Share the city where your event will be hosted"></input>
+    </div>
+    </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="ticket">Ticket URL</label>
+    <input type="text" class="form-control" name="ticket" placeholder="Provide the URL to buy the ticket"></input>
+    </div>
+    <div class="col">
+      <label for="date">Date</label>
+    <input type="date" class="form-control" name="date" placeholder="Date"></input>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col">
+       <label for="genre">Musical Genre</label>
+    <input type="text" class="form-control" name="genre" placeholder="Name the musical genre of your event">
+    </div>
+    
+  </div>
+
+{{!-- GENRE TICKBOXES
+  <div class="row mt-4">
+    <div class="col">
+    <p>Add gernre(s)</p>
+    </div>
+  <div class="col">
+  <div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="genre" value="Indie" id="indiecheck">
+  <label class="form-check-label" for="indiecheck">
+    Indie
+</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="genre" value="Pop" id="popcheck">
+  <label class="form-check-label" for="popcheck">
+    Pop
+</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="genre" value="Classic" id="classiccheck">
+  <label class="form-check-label" for="classiccheck">
+    Classic
+</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="genre" value="Rock" id="rockcheck">
+  <label class="form-check-label" for="rockcheck">
+    Rock
+  </label>
+</div>
+  </div>
+</div> --}}
+
+  <div class="row">
+    <div class="col">
+     <label for="description">Description</label>
+    <textarea class="form-control" name="description" rows="3" placeholder="Provide a short description of the event you're planning"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="event-image">Upload Your Event Photo</label>
+    <input id="event-image" class="form-control" type="file" name="file"></input>
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-success py-2 px-5 my-4 mx-5 ">Share</button>
+    </div>
+  </div>
+
+<br>
+</form>
+</div>
