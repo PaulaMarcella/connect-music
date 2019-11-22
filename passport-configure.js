@@ -1,10 +1,10 @@
 "use strict";
 
 const LocalStrategy = require("passport-local").Strategy;
+const SpotifyStrategy = require("passport-spotify").Strategy;
 const User = require("./models/user");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-const SpotifyStrategy = require("passport-spotify").Strategy;
 
 passport.serializeUser((user, callback) => {
   //..
@@ -74,12 +74,11 @@ passport.use(
 
 passport.use(
   new SpotifyStrategy(
-    "spotify",
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: process.env.SPOTIFY_URL,
-      scope: ["user: email", "user-read-private"],
+      scope: ["user-read-email", "user-read-private"],
       showDialog: true
     },
     (accessToken, refreshToken, expires_in, profile, callback) => {
@@ -91,9 +90,11 @@ passport.use(
           if (user) {
             callback(null, user); // To login the user
           } else {
+            console.log("THE USERS EMAIL", profile);
             User.create({
-              email: profile.email,
-              firstname: profile.firstname,
+              email: profile._json.email,
+              // firstname: profile.firstname,
+              // lastname: profile.lastname,
               accessToken,
               refreshToken
             }).then(newUser => {

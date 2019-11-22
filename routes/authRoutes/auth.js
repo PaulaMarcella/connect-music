@@ -15,6 +15,17 @@ router.get("/login", (req, res, next) => {
   res.render("authviews/log-in");
 });
 
+// router.get(
+//   "/spotify",
+//   passport.authenticate("spotify", {
+//     scope: ["user-read-email", "user-read-private"]
+//   }),
+//   (req, res, next) => {
+//     // The request will be redirected to spotify for authentication, so this
+//     // function will not be called.
+//   }
+// );
+
 //POST ROUTES
 
 router.post(
@@ -37,5 +48,30 @@ router.post("/logout", (req, res, next) => {
   req.logout();
   res.redirect("/");
 });
+
+// router.get(
+//   "/spotify",
+//   passport.authenticate("spotify", {
+//     scope: ["user-read-email", "user-read-private"]
+//   }),
+//   (req, res, next) => {
+//     // The request will be redirected to spotify for authentication, so this
+//     // function will not be called.
+//   }
+// );
+
+router.get("/spotify", passport.authenticate("spotify"), function(req, res) {
+  // The request will be redirected to spotify for authentication, so this
+  // function will not be called.
+});
+
+router.get(
+  "/spotify/callback",
+  passport.authenticate("spotify", { failureRedirect: "/auth/login" }),
+  (req, res, next) => {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
 
 module.exports = router;
