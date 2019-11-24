@@ -2,7 +2,7 @@
 
 const { Router } = require("express");
 const router = Router();
-const User = require("../../models/user");
+const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
@@ -31,7 +31,7 @@ router.get("/login", (req, res, next) => {
 router.post(
   "/signup",
   passport.authenticate("signup-strategy", {
-    successRedirect: "/",
+    successRedirect: "/user/profile",
     failureRedirect: "/auth/sign-up"
   })
 );
@@ -39,7 +39,7 @@ router.post(
 router.post(
   "/login",
   passport.authenticate("login-strategy", {
-    successRedirect: "/",
+    successRedirect: "/user/profile",
     failureRedirect: "/auth/login"
   })
 );
@@ -60,17 +60,27 @@ router.post("/logout", (req, res, next) => {
 //   }
 // );
 
-router.get("/spotify", passport.authenticate("spotify"), function(req, res) {
-  // The request will be redirected to spotify for authentication, so this
-  // function will not be called.
-});
+router.get(
+  "/spotify",
+  passport.authenticate("spotify", {
+    scope: ["user-read-email", "user-read-private"],
+    showDialog: true
+  }),
+  (req, res) => {
+    // The request will be redirected to spotify for authentication, so this
+    // function will not be called.
+  }
+);
 
 router.get(
   "/spotify/callback",
-  passport.authenticate("spotify", { failureRedirect: "/auth/login" }),
+  passport.authenticate("spotify", {
+    showDialog: true,
+    failureRedirect: "/auth/login"
+  }),
   (req, res, next) => {
     // Successful authentication, redirect home.
-    res.redirect("/");
+    res.redirect("/user/profile");
   }
 );
 

@@ -50,26 +50,34 @@ passport.use(
 
 passport.use(
   "login-strategy",
-  new LocalStrategy({ usernameField: "email" }, (email, password, callback) => {
-    let auxUser;
-    return User.findOne({
-      email
-    })
-      .then(result => {
-        auxUser = result;
-        return bcrypt.compare(password, auxUser.passwordHash);
+  new LocalStrategy(
+    { usernameField: "email", passwordField: "password" },
+    (email, password, callback) => {
+      let auxUser;
+      return User.findOne({
+        email
       })
-      .then(passwordMatchesHash => {
-        if (passwordMatchesHash) {
-          callback(null, auxUser);
-        } else {
-          callback(new Error("Passwords dont match"));
-        }
-      })
-      .catch(error => {
-        callback(error);
-      });
-  })
+        .then(result => {
+          if (!result) {
+            callback(null, false, { message: "Incorrect email" });
+          } else {
+            console.log("FOUND USER", result);
+            auxUser = result;
+            return bcrypt.compare(password, auxUser.passwordHash);
+          }
+        })
+        .then(passwordMatchesHash => {
+          if (passwordMatchesHash) {
+            callback(null, auxUser);
+          } else {
+            callback(new Error("Sorry, Passwords does not match"));
+          }
+        })
+        .catch(error => {
+          callback(error);
+        });
+    }
+  )
 );
 
 passport.use(
@@ -82,9 +90,6 @@ passport.use(
       showDialog: true
     },
     (accessToken, refreshToken, expires_in, profile, callback) => {
-      //   const { disyplayName: name, photos, emails } = profile;
-      //   const { photos: [{ value: photo } = {}] = [] } = profile;
-
       User.findOne({ spotifyId: profile.id })
         .then(user => {
           if (user) {
@@ -93,8 +98,7 @@ passport.use(
             console.log("THE USERS EMAIL", profile);
             User.create({
               email: profile._json.email,
-              // firstname: profile.firstname,
-              // lastname: profile.lastname,
+              firstname: profile._json.username,
               accessToken,
               refreshToken
             }).then(newUser => {

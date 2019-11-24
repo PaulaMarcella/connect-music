@@ -7,9 +7,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
   {{#if user}}
     <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link active" href="/">{{user.firstname}}'s Profile<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="/user/profile">My Profile<span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="/event/browse">Browse</a>
-        <a class="nav-item nav-link" href="/event/add">Add</a>
+        <a class="nav-item nav-link" href="/event/create">Add</a>
         <form action="/auth/logout" method="POST">
       <button class="btn">Log Out</button>
         </form>

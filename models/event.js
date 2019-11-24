@@ -12,7 +12,6 @@ const eventSchema = new mongoose.Schema(
     artists: [{ type: String }],
     description: {
       type: String,
-      required: true,
       default: "Add a describtion to this Event"
     },
     genre: [{ type: String }],

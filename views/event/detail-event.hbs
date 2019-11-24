@@ -1,0 +1,20 @@
+<h2>EVENT DETAILS</h2>
+<h4>{{event.eventName}}</h4>
+
+<h4>Artists</h4>
+<ul>
+{{#each event.artists}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+
+
+<h4>Genre</h4>
+<ul>
+{{#each event.genre}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+<h4>{{event.city}}</h4>
+<h4>{{event.creator}}</h4>
+
