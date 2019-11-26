@@ -5,7 +5,7 @@
 <br>
 
 <div class="container">
-<form class="px-5" id="eventCreator" method="POST" action="/event/create" enctype="multipart/form-data">
+<form class="px-5" id="eventCreator" action="/event/create" method="POST" enctype="multipart/form-data">
 
   <div class="row">
     <div class="col">
@@ -32,7 +32,7 @@
     </div>
     <div class="col">
       <label for="date">Date</label>
-    <input type="date" class="form-control" name="date" placeholder="Date"></input>
+    <input id="date-create-event" type="date" class="form-control" name="date" ></input>
     </div>
   </div>
 
@@ -95,6 +95,5 @@
     </div>
   </div>
 
-<br>
 </form>
 </div>

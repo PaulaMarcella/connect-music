@@ -74,12 +74,16 @@ router.get(
 
 router.get(
   "/spotify/callback",
-  passport.authenticate("spotify", {
-    showDialog: true,
-    failureRedirect: "/auth/login"
-  }),
+  passport.authenticate(
+    "spotify",
+    {
+      showDialog: true,
+      failureRedirect: "/auth/login"
+    },
+    router.loggedin
+  ),
   (req, res, next) => {
-    // Successful authentication, redirect home.
+    // Successful authentication, redirect to profile.
     res.redirect("/user/profile");
   }
 );

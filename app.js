@@ -71,6 +71,8 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
+//---PASSPORT
+
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();

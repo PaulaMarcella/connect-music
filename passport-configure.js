@@ -90,17 +90,20 @@ passport.use(
       showDialog: true
     },
     (accessToken, refreshToken, expires_in, profile, callback) => {
-      User.findOne({ spotifyId: profile.id })
+      console.log("Profile before find one", profile);
+
+      User.findOne({ spotifyId: profile._json.id })
         .then(user => {
           if (user) {
+            console.log("THE FOUND USER", user);
             callback(null, user); // To login the user
           } else {
-            console.log("THE USERS EMAIL", profile);
             User.create({
               email: profile._json.email,
               firstname: profile._json.username,
               accessToken,
-              refreshToken
+              refreshToken,
+              spotifyId: profile._json.id
             }).then(newUser => {
               callback(null, newUser); // To login newUser
             });

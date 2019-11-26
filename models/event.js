@@ -28,7 +28,7 @@ const eventSchema = new mongoose.Schema(
       default: "../images/default-image.jpg"
     },
     date: {
-      type: Date
+      type: String
     },
     creator: {
       type: ObjectId,

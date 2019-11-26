@@ -1,0 +1,52 @@
+
+<h4 class="form-group">Edit {{event.eventName}}:</h4>
+
+
+<div class="container my-5">
+<form id="event-edit-form" method="POST" action="/event/edit/{{event._id}}">
+
+  <div class="row">
+    <div class="col">
+      <label for="event">Name your Event</label>
+      <input type="text" class="form-control" name="eventName" value="{{event.eventName}}">
+    </div>
+    <div class="col">
+      <label for="artists">Add Artist(s)</label>
+        <input type="text" class="form-control" name="artists" value="{{event.artists}}"></input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="genre">Add Genre</label>
+      <input type="text" class="form-control" name="genre" value="{{event.genre}}">
+    </div>
+    <div class="col">
+      <label for="city">Add City</label>
+      <input type="text" class="form-control" name="city" value="{{event.city}}"></input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="ticket">Add Ticket URL</label>
+      <input type="text" class="form-control" name="ticket" value="{{event.ticketURL}}"></input>
+    </div>
+    <div class="col">
+      <label for="date">Date</label>
+      <input id="date-edit-event" type="date" class="form-control" name="date" value="{{event.date}}"></input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+     <label for="description">Description</label>
+      <textarea class="form-control" name="description" rows="3" value="{{event.description}}">{{event.description}}</textarea>
+    </div>
+  </div>
+
+<br>
+  <button type="submit" class="btn btn-success px-5">Submit</button>
+
+</form>
+</div>

@@ -6,16 +6,56 @@ const Event = require("../../models/event");
 
 //GET ROUTES
 
-router.get("/edit", (req, res, next) => {
-  res.render("event/edit-event");
+router.get("/detail/:eventId", (req, res, next) => {
+  const id = req.params.eventId;
+  Event.findById(id)
+    .populate("creator")
+    .then(event => {
+      console.log(event);
+      res.render("event/detail-event", { event });
+    })
+    .catch(error => {
+      throw new Error("This event could not be found.", error);
+    });
 });
 
-router.get("/detail/:eventId", (req, res, next) => {
+router.get("/edit/:eventId", (req, res, next) => {
   const id = req.params.eventId;
   Event.findById(id)
     .then(event => {
       console.log(event);
-      res.render("event/detail-event", { event });
+      res.render("event/edit-event", { event });
+    })
+    .catch(error => {
+      throw new Error("This event could not be found.", error);
+    });
+});
+router.post("/edit/:eventId", (req, res, next) => {
+  const id = req.params.eventId;
+  const {
+    eventName,
+    description,
+    artists,
+    genre,
+    city,
+    ticketURL,
+    date
+  } = req.body;
+  Event.findOneAndUpdate(
+    { _id: id },
+    {
+      eventName,
+      description,
+      artists,
+      genre,
+      city,
+      ticketURL,
+      date
+    }
+  )
+    .then(event => {
+      console.log(event);
+      res.redirect(`/event/detail/${event._id}`);
     })
     .catch(error => {
       throw new Error("This event could not be found.", error);

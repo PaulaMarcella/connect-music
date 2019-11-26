@@ -6,22 +6,7 @@ const Event = require("../../models/event");
 
 //-------cloudinary configurations--------
 
-const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
-const multer = require("multer");
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET
-});
-
-const storage = cloudinaryStorage({
-  cloudinary,
-  folder: "/gig-connect",
-  allowedFormats: ["jpg", "png"]
-});
-const upload = multer({ storage });
+const upload = require("../../middleware/upload");
 
 //----------------------------------------
 
@@ -29,7 +14,7 @@ const upload = multer({ storage });
 
 router.get("/browse", (req, res, next) => {
   Event.find({})
-    .sort({ creationDate: -1 })
+    .sort({ created_at: -1 })
     .then(events => {
       res.render("event/list-event", { events });
     })
@@ -52,8 +37,9 @@ router.post("/create", upload.single("file"), (req, res, next) => {
   const city = req.body.city.toLowerCase();
   const ticketURL = req.body.ticket;
   const imageURL = req.file && req.file.url;
-  const date = req.body.date;
+  const date = req.body.date.toString().substr(0, 10);
   const creator = req.user._id;
+  console.log("the date as a string: ", date);
 
   Event.create({
     eventName,
@@ -69,7 +55,8 @@ router.post("/create", upload.single("file"), (req, res, next) => {
     .then(event => {
       console.log(event);
       //res.render('event/eventPage', {event});
-      res.redirect("/event/detail/" + event._id);
+      //res.redirect("/event/detail/" + event._id);
+      res.redirect("/");
     })
     .catch(error => {
       console.log(error);

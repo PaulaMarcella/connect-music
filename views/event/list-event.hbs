@@ -1,2 +1,8 @@
 <h2>LIST ALL EVENTS</h2>
 
+{{#each events}}
+
+<a href="/event/detail/{{this._id}}"><h4>{{this.eventName}}</h4></a>
+
+{{/each}}
+
