@@ -8,6 +8,7 @@ const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
 const serveFavicon = require("serve-favicon");
 const hbs = require("hbs");
+const flash = require("connect-flash");
 const passport = require("passport");
 
 const expressSession = require("express-session");
@@ -51,7 +52,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 60 * 60 * 24 * 15,
-      sameSite: true,
+      sameSite: "lax",
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development"
       // secure: true
@@ -85,6 +86,9 @@ app.use("/event", eventRouter);
 app.use("/event", eventDetailsRouter);
 
 // Catch missing routes and forward to error handler
+
+app.use(flash());
+
 app.use((req, res, next) => {
   next(createError(404));
 });

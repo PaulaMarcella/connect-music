@@ -6,8 +6,11 @@
        <img class="my-5 mx-5 rounded-pill" src="{{user.imageURL}}" alt="profile photo" width="200vh">
       <div class="d-flex justify-content-center">
 
-      <a href="#"><button class="mx-3 my-3 nav-link btn btn-sm btn-success">Edit Photo</button></a>   
-      <a href="/user/profile/edit"><button class="my-3 mx-3 nav-link btn btn-sm btn-success">Edit Profile</button></a>
+<!-- Button trigger modal -->
+    <button type="button" class="mx-3 my-3 nav-link btn btn-sm btn-success" data-toggle="modal" data-target="#profileModal">
+    Edit Photo
+    </button>
+    <a href="/user/profile/edit"><button class="my-3 mx-3 nav-link btn btn-sm btn-success">Edit Profile</button></a>
   
   </div>
     </div>
@@ -16,6 +19,40 @@
         <h4>Welcome, {{user.username}}!</h4>
         <h5 class="card-title">{{user.firstname}} {{user.lastname}}</h5>
         <p class="card-text">{{user.userDescription}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="profileModalLabel">Choose your Profile Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+    <form id="imageuploadform" method="POST" action="/user/profile/image" enctype="multipart/form-data">
+    
+    <div class="custom-file form-group text-dark">
+      <input type="file" name="file" class="custom-file-input" id="customFile">
+      <label class="custom-file-label" for="customFile">Choose file</label>
+    </div>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-success">Upload</button>
+    </form>
+        
+      
       </div>
     </div>
   </div>

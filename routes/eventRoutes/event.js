@@ -5,10 +5,11 @@ const router = Router();
 const Event = require("../../models/event");
 
 //-------cloudinary configurations--------
-
 const upload = require("../../middleware/upload");
 
-//----------------------------------------
+//-------Protect Routes with this: --------
+// const ensureLogin = require("connect-ensure-login");
+// ensureLogin.ensureLoggedIn("/auth/login"),
 
 //GET ROUTES
 

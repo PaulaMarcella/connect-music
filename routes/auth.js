@@ -68,8 +68,8 @@ router.get(
     {
       showDialog: true,
       failureRedirect: "/auth/login"
-    },
-    router.loggedin
+    }
+    //router.loggedin
   ),
   (req, res, next) => {
     // Successful authentication, redirect to profile.
