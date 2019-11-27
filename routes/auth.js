@@ -15,17 +15,6 @@ router.get("/login", (req, res, next) => {
   res.render("authviews/log-in");
 });
 
-// router.get(
-//   "/spotify",
-//   passport.authenticate("spotify", {
-//     scope: ["user-read-email", "user-read-private"]
-//   }),
-//   (req, res, next) => {
-//     // The request will be redirected to spotify for authentication, so this
-//     // function will not be called.
-//   }
-// );
-
 //POST ROUTES
 
 router.post(

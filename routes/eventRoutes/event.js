@@ -10,7 +10,7 @@ const upload = require("../../middleware/upload");
 
 //----------------------------------------
 
-//POST ROUTES
+//GET ROUTES
 
 router.get("/browse", (req, res, next) => {
   Event.find({})
