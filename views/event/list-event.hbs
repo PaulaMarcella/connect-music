@@ -1,8 +1,26 @@
 <h2>LIST ALL EVENTS</h2>
 
-{{#each events}}
+<div class="container">
+  <input class="form-control" id="search" type="text" placeholder="Search... for Concerts, Artists, Genre, City">
+  <br>
+</div>
 
-<a href="/event/detail/{{this._id}}"><h4>{{this.eventName}}</h4></a>
-
-{{/each}}
-
+<div class="container card-columns" id="box-search">
+    <div class="col">
+      
+    {{#each events}}
+        <div class="card" style="width: 18rem;" id="items">
+        <img src="{{this.imageURL}}" class="card-img-top" alt="Event Image">
+        <div class="card-body">
+            <h5 class="card-title">{{this.eventName}}</h5>
+            <p class="card-text">Genre: {{this.genre}}</p>
+            <p class="card-text">City: {{this.city}}</p>
+            <p class="card-text">Artists: {{this.artists}}</p>
+            <p class="card-text">Date: {{this.date}}</p>
+            <a class="btn btn-success" href="/event/detail/{{this._id}}">See Event Details</a>
+        </div>
+        </div>
+    {{/each}}
+  
+    </div>
+  </div>

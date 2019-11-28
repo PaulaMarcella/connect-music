@@ -1,20 +1,80 @@
-<h2>EVENT DETAILS</h2>
-<h4>{{event.eventName}}</h4>
+<div class="card mt-5 mb-2 container rounded" style="max-width: 90%;">
+  <div class="row no-gutters">
+    <div class="col mt-5">
 
-<h4>Artists</h4>
-<ul>
-{{#each event.artists}}
-<li>{{this}}</li>
+      <div class="d-flex slign-items-center mt-5">
+      <img class="col card-img rounded" src="{{event.imageURL}}" alt="{{event.description}}" height="250px">
+    
+    </div>
+      <div class="container my-5 mx-5">
+        <form method="POST" action="/eventPageAttend/{{event._id}}">
+      <button id="attend-switch" type="submit" class="btn btn-success">Attend Event</button>
+      </form>
+      </div>
+      
+    </div>
+    <div class="col-md-8">
+      <div class="my-5 card-body">
+
+        <h2 class="my-3 mx-3 card-title">{{event.eventName}}</h2>  
+        <br>
+        
+        <h5 class="card-title">proposed by {{event.creator.firstname}} {{event.creator.lastname}}</h5>
+        <br>
+        <p class="card-text">{{event.description}}</p>
+        <br>
+         <p class="card-text">Artists playing:  {{event.artists}}</p>
+        <p class="card-text">Genre of this event: {{event.genre}}</p>
+        <p class="card-text">Date: {{event.date}}</p>
+        <a href={{event.ticketURL}} target="_blank">GET YOUR TICKET</a>
+
+
+        {{#if state }}
+
+        <div class="container rounded d-flex justify-content-end mt-5">
+        <form class="d-inline mx-3" method="GET" action="/eventPage/{{event._id}}/edit"> 
+            <button type="submit" class="btn btn-outline-success my-2">Edit Event Details</button>
+          </form>
+
+        <form class="d-inline mx-3" method="POST" action="/event/delete/{{event._id}}">
+            <button type="submit" class="btn btn-outline-warning my-2">Delete Event</button>
+          </form>
+        </div>
+
+          {{/if}}
+        
+      
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#each event.comments}}
+<div class="card mb-2 rounded container px-5 py-4 ">
+    <div class="media rounded">
+  <div class="media-body">
+    <h5 class="mt-0 mb-1">{{this.commentTitle}}</h5>
+    <p>{{this.commentBody}}</p>
+    <footer class="blockquote-footer text-white">{{this.commentAuthor.username}}</footer>
+  </div>
+  <img class="rounded-pill ml-3" src="{{this.commentAuthor.imageURL}}" alt="authorphoto" width="80px">
+</div>
+</div>
 {{/each}}
-</ul>
 
+  <div class="card px-5  container rounded d-flex flex-column">
+<form class="p-2 form-grup" method="POST" action="/add-comment/{{event._id}}">
+  <input class="form-control my-3" type="text" name="commenttitle" value="Title">
+  <br>
+  <textarea class="form-control" name="commentbody" cols="100" rows="4" placeholder="Write your comment here ..."></textarea>
+  <br>
+  <div class="row justify-content-end">
+    <button class=" p-2 btn btn-success">Submit Comment</button>
+  </div>
+  
+</form>
 
-<h4>Genre</h4>
-<ul>
-{{#each event.genre}}
-<li>{{this}}</li>
-{{/each}}
-</ul>
-<h4>{{event.city}}</h4>
-<h4>{{event.creator.name}}</h4>
-<a href="/event/edit/{{event._id}}">EDIT EVENT</a>
+</div>
+</div>

@@ -8,11 +8,16 @@ const Event = require("../../models/event");
 
 router.get("/detail/:eventId", (req, res, next) => {
   const id = req.params.eventId;
+  let state = false;
   Event.findById(id)
     .populate("creator")
     .then(event => {
-      console.log(event);
-      res.render("event/detail-event", { event });
+      if (event.creator._id == req.user.id) {
+        state = true;
+      } else {
+        state = false;
+      }
+      res.render("event/detail-event", { event, state });
     })
     .catch(error => {
       throw new Error("This event could not be found.", error);
@@ -22,6 +27,7 @@ router.get("/detail/:eventId", (req, res, next) => {
 router.get("/edit/:eventId", (req, res, next) => {
   const id = req.params.eventId;
   Event.findById(id)
+    .populate("creator")
     .then(event => {
       console.log(event);
       res.render("event/edit-event", { event });
@@ -59,6 +65,18 @@ router.post("/edit/:eventId", (req, res, next) => {
     })
     .catch(error => {
       throw new Error("This event could not be found.", error);
+    });
+});
+
+router.post("/delete/:eventId", (req, res, next) => {
+  const id = req.params.eventId;
+  Event.findByIdAndDelete(id)
+    .then(() => {
+      console.log("Successfully deleted event");
+      res.redirect("/event/browse");
+    })
+    .catch(error => {
+      throw new Error("Event found not be deleted", error);
     });
 });
 

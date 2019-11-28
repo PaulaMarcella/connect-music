@@ -16,6 +16,7 @@ const upload = require("../../middleware/upload");
 router.get("/browse", (req, res, next) => {
   Event.find({})
     .sort({ created_at: -1 })
+    .populate("creator")
     .then(events => {
       res.render("event/list-event", { events });
     })

@@ -43,6 +43,7 @@ app.use(
 // Setup view engine
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "hbs");
+
 hbs.registerPartials(__dirname + "/views/partials");
 
 app.use(
